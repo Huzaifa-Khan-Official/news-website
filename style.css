@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar {
+    padding: 10px !important;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 20px;
+    justify-content: space-between;
+}
+
+.card img {
+    width: 100%;
+    height: 300px;
+}
+
+.card {
+    width: 30%;
+}
+
+@media (max-width: 720px) {
+    .card {
+        width: 100% !important;
+    }
+}
