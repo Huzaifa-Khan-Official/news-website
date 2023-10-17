@@ -1,6 +1,7 @@
 const input = document.querySelector(".input");
 const btn = document.querySelector(".btn");
 const cards = document.querySelector(".cards");
+const errorDiv = document.querySelector(".error");
 
 btn.addEventListener("click", () => {
     cards.innerHTML = "";
@@ -12,21 +13,27 @@ btn.addEventListener("click", () => {
         .then(data => {
             const articles = data.articles;
 
-
             articles.forEach(curNews => {
                 const newsImageUrl = curNews.urlToImage;
-                const newsTitle = curNews.title;
-                const newsDes = curNews.description;
-                cards.innerHTML += `
-            <div class="card">
-            <img src="${newsImageUrl}" class="card-img-top" alt="...">
-            <div class="card-body">
-            <h5 class="card-title">${newsTitle}</h5>
-            <p class="card-text">${newsDes}</p>
-            </div>
-            </div>
-        `
+                if (newsImageUrl !== null) {
+                    const newsTitle = curNews.title;
+                    const newsDes = curNews.description;
+                    cards.innerHTML += `
+                <div class="card">
+                <img src="${newsImageUrl}" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title">${newsTitle}</h5>
+                <p class="card-text">${newsDes}</p>
+                </div>
+                </div>`;
+                    input.value = "";
+                } else {
+                    return
+                }
             });
+
         })
-        .catch(err => console.log("araha hai"));
+        .catch(err => {
+            errorDiv.style.display = "block";
+        });
 })
